@@ -26,9 +26,9 @@
 
 
 
-`INFO:     Started server process [17816]`
-`INFO:     Waiting for application startup.`
-`INFO:     Application startup complete.`
+`INFO:     Started server process [17816]`<br>
+`INFO:     Waiting for application startup.`<br>
+`INFO:     Application startup complete.`<br>
 `INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)`
 
 - You can check the API through the given localhost server `http://127.0.0.1:8000`
