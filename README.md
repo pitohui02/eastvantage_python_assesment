@@ -1,41 +1,69 @@
 # HOW TO RUN THE ADDRESS BOOK APPLICATION
 
-## Create an virtual environment (VENV folder) to store external libraries
+## Create a virtual environment (VENV folder) to store external libraries
 
-`python -m venv venv_name`
+```bash
+python -m venv venv_name
+```
 
 ## Activate the venv through terminal
 
-`venv_name/Scripts/Activate`
+```bash
+venv_name/Scripts/Activate
+```
 
-- Make sure the virtual environment is activated
-
-- It is ussually indicated by: `(venv) PS C:\Users` in your terminal
+* Make sure the virtual environment is activated
+* It is usually indicated by: `(venv) PS C:\Users` in your terminal
 
 ## Install external libraries through requirements.txt file
 
-`pip install -r requirements.txt`
+```bash
+pip install -r requirements.txt
+```
 
-## After installing the required libraries, Run the API on python_assesment.py locally
+## After installing the required libraries, run the API locally
 
-`uvicorn python_assesment:app` 
+```bash
+uvicorn python_assesment:app
+```
 
-- Optional: `uvicorn python_assesment:app --reload` 
+* Optional:
 
-`--reload` -> automatically reloads the server when editing the source code
+```bash
+uvicorn python_assesment:app --reload
+```
 
+`--reload` → automatically reloads the server when editing the source code
 
+```text
+INFO:     Started server process [17816]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+```
 
-`INFO:     Started server process [17816]`<br>
-`INFO:     Waiting for application startup.`<br>
-`INFO:     Application startup complete.`<br>
-`INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)`
+* You can check the API through the given localhost server:
+  `http://127.0.0.1:8000`
 
-- You can check the API through the given localhost server `http://127.0.0.1:8000`
-
-## You can also test the api through Swagger Docs 
+## You can also test the API through Swagger Docs or POSTMAN
 
 `http://127.0.0.1:8000/docs`
 
+---
 
+## ✅ Conclusion
+
+* You have successfully set up and run the **Address Book API** locally.
+
+* You can now interact with the API through:
+
+  * **Browser**: `http://127.0.0.1:8000/docs` (Swagger UI)
+  * **Postman** or other API testing tools
+  * Direct **GET/POST requests** via localhost
+
+* Make sure to **keep your virtual environment activated** whenever you work with this project.
+
+* If you want to make changes to the API code, use the `--reload` flag to automatically apply updates.
+
+---
 
