@@ -39,7 +39,7 @@ def add_address(address: AddAddress):
         
         return {"message": "Address succesfully created", "address": new_address, "label": label }
     except Exception as e:
-        print(f"Error: {e}")
+        return f"Error: {e}"
 
 # =============================
 # Update address on database ||
@@ -82,7 +82,7 @@ def update_address(address_id: int, update_address: UpdateAddress):
         return {"message": f"Address: {updated_address}, successfully updated"}
     
     except Exception as e:
-        print(f"Error: {e}")
+        return f"Error: {e}"
 
 
 # ====================================================
@@ -113,31 +113,34 @@ def get_coordinates(latitude: float, longitude: float, radius: int) -> GetCoordi
 
 @app.get("/address/nearby_address")
 def get_address(coordinates: GetCoordinates = Depends(get_coordinates)):
-    conn, cursor = initialize_conn_and_cursor(DB_NAME)
+    try:
+        conn, cursor = initialize_conn_and_cursor(DB_NAME)
     
-    cursor.execute("SELECT address, label, latitude, longitude FROM address")
-    rows = cursor.fetchall()
-    
-    conn.close()
-    
-    nearby_addresses = []
-    
-    for row in rows:
-        address, label, latitude, longitude = row
-        address_coordinates = haversine(coordinates.latitude, coordinates.longitude, latitude, longitude)
+        cursor.execute("SELECT address, label, latitude, longitude FROM address")
+        rows = cursor.fetchall()
         
-        if address_coordinates <= coordinates.radius:
-            nearby_addresses.append({
-                "address": address,
-                "label": label,
-                "latitude": latitude,
-                "longitude": longitude
-            })
+        conn.close()
+        
+        nearby_addresses = []
+        
+        for row in rows:
+            address, label, latitude, longitude = row
+            address_coordinates = haversine(coordinates.latitude, coordinates.longitude, latitude, longitude)
+            
+            if address_coordinates <= coordinates.radius:
+                nearby_addresses.append({
+                    "address": address,
+                    "label": label,
+                    "latitude": latitude,
+                    "longitude": longitude
+                })
+        
+        if not nearby_addresses:
+            raise HTTPException(status_code=404, detail="No address found with your coordinates.")
     
-    if not nearby_addresses:
-        raise HTTPException(status_code=404, detail="No address found with your coordinates.")
-    
-    return {"message": f"Address/es found {nearby_addresses}"}
+        return {"message": f"Address/es found {nearby_addresses}"}
+    except Exception as e:
+        return f"Error: {e}"
 
 # =============================
 # Delete address on database ||
@@ -145,16 +148,19 @@ def get_address(coordinates: GetCoordinates = Depends(get_coordinates)):
 
 @app.delete("/address/{address_id}")
 def delete_address(address_id: int):
-    conn, cursor = initialize_conn_and_cursor(DB_NAME)
+    try:
+        conn, cursor = initialize_conn_and_cursor(DB_NAME)
     
-    cursor.execute("DELETE FROM address WHERE address_id = ?", (address_id,))
-    conn.commit()
-    
-    deleted_row = cursor.rowcount
-    
-    conn.close()
-    
-    if deleted_row == 0:
-        raise HTTPException(status_code=404, detail="Address not found on database")
-    
-    return {"message": f"Address: {address_id} successfully deleted"}
+        cursor.execute("DELETE FROM address WHERE address_id = ?", (address_id,))
+        conn.commit()
+        
+        deleted_row = cursor.rowcount
+        
+        conn.close()
+        
+        if deleted_row == 0:
+            raise HTTPException(status_code=404, detail="Address not found on database")
+        
+        return {"message": f"Address: {address_id} successfully deleted"}
+    except Exception as e:
+        return f"Error: {e}"
