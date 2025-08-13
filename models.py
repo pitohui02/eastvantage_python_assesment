@@ -16,7 +16,7 @@ class UpdateAddress(BaseModel):
     longitude: Optional[Annotated[float, confloat(ge=-180, le=180)]] = None
     
 class GetCoordinates(BaseModel):
-    radius: Annotated[int, conint(gt=1)]
+    radius: Annotated[int, conint(gt=1)] # Radius is distance
     latitude: Annotated[float, confloat(ge=-90, le=90)]
     longitude: Annotated[float, confloat(ge=-180, le=180)]
     
