@@ -17,7 +17,7 @@ venv_name/Scripts/Activate
 
 * Make sure to select the virtual environment as your Python interpreter
 
-* `Ctrl + Shift + P` and type Python:Select Interpreter and choose:
+* `Ctrl + Shift + P` and type **Python:Select Interpreter** and choose:
   ```bash
   Python 3.13.5 (venv) .\venv\Scripts\Python.exe
   ```
