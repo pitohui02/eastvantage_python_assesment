@@ -15,6 +15,16 @@ venv_name/Scripts/Activate
 * Make sure the virtual environment is activated
 * It is usually indicated by: `(venv) PS C:\Users` in your terminal
 
+* Make sure to select the virtual environment as your Python interpreter
+
+* `Ctrl + Shift + P` and type Python:Select Interpreter and choose:
+  ```bash
+  Python 3.13.5 (venv) .\venv\Scripts\Python.exe
+  ```
+
+* see the link below for a more detailed guide
+* [VS Code Python Environments](https://code.visualstudio.com/docs/python/environments) 
+
 ## Install external libraries through requirements.txt file
 
 ```bash
